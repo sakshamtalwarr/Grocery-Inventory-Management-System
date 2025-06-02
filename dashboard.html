@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Grocery Inventory System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom cursor from the provided theme */
+        body {
+            cursor: url('data:image/x-icon;base64,AAACAAEAICAAAAAAAACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADhEaLQAABrYAAAT9AAAB/AAAAf0AAAL8AQEE/AUDCLYpJywLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwIG/wAAAP4AAAD/AgEC/wIBAv8CAQL/BAIE/wEAAf8BAAH/AQAA/wAAAP8AAAH9DgwTkRgXHwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASEBoCAAAF/QAAAP8BAAH/AgEC/318ff/8/Pz//Pv8//38/P/+/v7//v7+//z8/f/8/Pz/Ojg5/wEAAf8BAAH/AgAF/gUFCgYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwsYAgIBA/4CAQL/DAwM//79/v///f///////////////////////////////////////////////v///Pv8/2hmaP8BAAH/AAAF/xcYImIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoIFSEBAAL+AQAB//Px8v///v7///////////////////////////////////////////////////////////////////////v7+/8BAAH/AQAC/wwNFDMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJBxEFAQAD/gEBAf/+/v7///7///////////////////////////////////////////////////////////////////////////////7+//38/f8BAQH/AQAB/gwOFQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/4CAQP/9fX1///+/////////////////////////////////////////////////////////////////////////////////////////v7+/+jn6P8CAQL/AAAC+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWFSQkAAAC/xYVFv/8+/z///////////////////////////////////////////////////////////////////////////////////////////////////7//wAAAP8BAAP/Wl1nLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAv0AAAD//fz9/////////////////////////////////////////////////////////////////////////////////////////////////////////////Pv8/wAAAP8DAgf+AAAAAAAAAAAAAAAAAAAAAAAAAAAZGCcHAQAD/wEBAf/+/v7////////////////////////////////////////////////////////////////////////////////////////////////////////////9/P3/AQAB/wEAAf0AAAAAAAAAAAAAAAAAAAAAAAAAAAAACP4BAAD/8O/w//////////////////////////////////////////////////////////////////////////////////////////////////////////////////7+/v8CAQL/AgEC/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/gAAAP/+/f7////////////+//7//////////////////////////////////////////////////////////////////////////////////////////////////v/+/wIBAf8CAAP/AAAAAAAAAAAAAAAAAAAAAAYJEQEAAAP/AAAA//////////////7//wkJCf+Xlpf///7//////////////////////////////////////////////////////////////////////////////////////////v//AAAA/wEAA/8AAAAAAAAAAAAAAAAAAAAADxQqTgEBAv/Qz9D////////////9+/3/AgEC/zY1Nv////////7///////////////////////////////////////////////////////////////////////////////////7+/v8BAAH/AQAC/wAAAAAAAAAAAAAAAAAAAAABAhDAAAAA//7+/v////////////7+/v8EAwT/R0ZH//////////////////////////////////////////////////////////////////////////////////////////////7//wAAAP8CAQL+AAAAAAAAAAAAAAAAAAAAAAAACPwAAAD//v7+/////////////f39/wIBAv9TUVP//v3+//////////////////7//v/+//////////////////////////////////////////79/v8AAAD/z83P///////+/v7/AAAA/wIAAf4AAAAAAAAAAAAAAAAAAAAAAAAI/gQEBP///v/////////////9/P3/AAAA/2hnaP///v/////////////+/v7/S0pL//79/v///////////////////////v7+/////////////////wAAAP8qKir//v7+//////8BAAH/AQAB/gAAAAAAAAAAAAAAAAAAAAAAAAP9CAcH//7+/v////////////79/v8AAAD/eHd4/////////////////8rIyv8CAAH/sa+x/////////////fz9/wIBAv90c3T/////////////////AQAB/zo6Ov/+/v7//v7+/wEAAf8AAAD+AAAAAAAAAAAAAAAAAAAAAAAABv4RERH//v/+///////+//7/FBQU/wEAAf+dm5z///7/////////////xsXG/wAAAP+7urr////////////+/v7/AQAB/wEBAf////////////79/v8BAAH/ExMT//78/v/+/v7/AwID/wAAAP0AAAAAAAAAAAAAAAAAAAAAAAAI/QEBAf/+/v7//v7+/87Mzv8AAAD/AQAB/66trv/////////////////FxMX/AQAB/7q5uv////////////37/f8BAAH/AQEB///9////////9/b3/wEAAv8CAQL/U1JT/wcHB/8BAAH/AwIM8AAAAAAAAAAAAAAAAAAAAAAAAxAEAAAB/wAAAf8EAgT/AAAA/wEAAv8BAAP/xcHE/////////////////8LBwv8AAAD/s7Kz//79/v///v//+vr6/wEAAf8CAQL///3////+/v/y8PH/AQAB/wEAAf8AAAD/AQAA/wEAAf4UHCwCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIXdwAACN0AAAbHFxwwCgEAAf/m5Ob/////////////////w8HC/wEAAf+zsbP///7////+///+/v7/AAAA/wEAAf///v///////wIBAv8AAAL+DBEgZwABDuQAAQzkDQ0aJgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEy4BBQAA/+jn6P///v/////////////DwcL/AAAB/1pYWv/+/f7//v7//359fv8BAAH/AQAB/wEAAf8BAAH/AgAA/wcMHoUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDBUFAAH/6+jq///+/////////////769vv8BAAH/AgEC/wEBAv8CAQT/AAAD/wAAAf4JDBxwAAAM9wIDCuAKEyEcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKHQUAA//w7+////7/////////////vr6+/wEAAf8AAQP9AAAD/AAAAP0AAAb2AQILAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgsYAgAG//Pz8/////////////////+joaP/AQAA/wcLDhoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACCkBAAX/9/f3/////////////////6Ggof8BAAD/JSYoAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGNAEAAf/5+fn/////////////////i4qL/wEAAf8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsbAgAA//Ly8v/+/v7///////////9ZWVn/AgAC/wUGCwIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAP+AgED//n4+f/+/v7//v7+/wUEBf8CAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABG5kBAAT/AQEC/wEAAf8BAQP/AAAA/gEFDD0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIGykAARDWAAAM9QADEZ8FCRcBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//wH///gAP//gAB//wAAP/4AAB/8AAAP+AAAB/gAAAfwAAAD8AAAA+AAAAPgAAAD4AAAA+AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPgAAAH+QAAT/8AAH//AAn//wAf//8B////Af///wH///8B////Af///wP////H//8='), auto;
+            /* Body background from the provided login theme */
+            background: linear-gradient(-45deg, #47104e, #680c87aa, #160963);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            margin: 0;
+            padding: 0;
+            color: #e5e7eb; /* Light text for overall readability on dark background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font from login theme */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Sidebar styling - adjusted for the new theme */
+        .sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.2); /* Slightly transparent dark background */
+            backdrop-filter: blur(8px); /* Frosted glass effect */
+            color: #d1d5db;
+            height: 100vh;
+            padding: 1.5rem 1rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            transform: translateX(0);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+            border-right: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+        }
+
+        .sidebar-header {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border for contrast */
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-header h1 {
+            color: #ffffff; /* White title */
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: #d1d5db;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: rgba(255, 255, 255, 0.1); /* Lighter transparent hover */
+            color: #ffffff;
+        }
+
+        .sidebar-nav a svg {
+            margin-right: 0.75rem;
+            width: 20px;
+            height: 20px;
+            color: #a78bfa; /* A subtle purple tint for icons */
+        }
+
+        .sidebar-nav a.active svg {
+            color: #8b5cf6; /* Brighter purple for active icon */
+        }
+
+        .sidebar-nav .uppercase {
+            color: #a78bfa; /* Purple for section titles */
+        }
+
+        /* Main content area styling - adjusted for the new theme */
+        .main-content {
+            margin-left: 250px;
+            padding: 1.5rem;
+            flex-grow: 1;
+            transition: margin-left 0.3s ease-in-out;
+            background: rgba(255, 255, 255, 0.05); /* Slightly transparent light background for content */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            border-radius: 15px; /* Rounded corners for the main content area */
+            margin: 1.5rem; /* Margin around the main content block */
+            min-height: calc(100vh - 3rem); /* Adjust height for margin */
+            box-shadow: 0 0 20px rgba(248, 248, 248, 0.1); /* Subtle white glow */
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+            margin-bottom: 1.5rem;
+        }
+
+        .main-header h1 {
+            color: #ffffff; /* White text for header title */
+        }
+
+        /* Logout button style from the provided theme */
+        .logout-button {
+            background-color: #608ceb; /* Blue from login button */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .logout-button:hover {
+            background-color: #e44646; /* Red on hover from login button */
+        }
+
+        /* Hamburger menu button */
+        .hamburger-button {
+            display: none; /* Hidden by default on larger screens */
+            background: none;
+            border: none;
+            color: #ffffff; /* White color for hamburger icon */
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .hamburger-button svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Dashboard cards styling - adjusted for the new theme */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.1); /* Slightly transparent dark background for cards */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Subtle white glow for cards */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 150px;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #a78bfa; /* Purple icon background */
+        }
+
+        .card-icon svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff; /* White title for cards */
+        }
+
+        .card-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #ffffff; /* White value for cards */
+            margin-bottom: 1rem;
+        }
+
+        .card-footer a {
+            display: flex;
+            align-items: center;
+            color: #608ceb; /* Blue link color */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .card-footer a:hover {
+            color: #e44646; /* Red on hover */
+        }
+
+        .card-footer a svg {
+            margin-left: 0.5rem;
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Sales analysis section - adjusted for the new theme */
+        .sales-analysis {
+            background: rgba(0, 0, 0, 0.1); /* Slightly transparent dark background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Subtle white glow */
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+        }
+
+        .sales-analysis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .sales-analysis-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff; /* White title */
+        }
+
+        .sales-analysis-filters {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .sales-analysis-filters select,
+        .sales-analysis-filters button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for inputs/buttons */
+            background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+            color: #ffffff; /* White text */
+            outline: none;
+        }
+
+        .sales-analysis-filters select option {
+            background-color: #1f2937; /* Darker background for dropdown options */
+            color: #ffffff;
+        }
+
+        .sales-analysis-filters button {
+            background-color: #608ceb; /* Blue button */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .sales-analysis-filters button:hover {
+            background-color: #e44646; /* Red on hover */
+        }
+
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .chart-card {
+            background: rgba(0, 0, 0, 0.15); /* Slightly darker transparent background for chart cards */
+            backdrop-filter: blur(12px); /* Stronger blur for chart cards */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 10px rgba(255, 255, 255, 0.05); /* Inner and outer subtle glow */
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .pie-chart-placeholder {
+            width: 180px;
+            height: 180px;
+            background-color: #a78bfa; /* Purple for the pie chart placeholder */
+            border-radius: 50%;
+            margin: 0 auto 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(167, 139, 250, 0.5); /* Glow for the pie chart */
+        }
+
+        /* Top Performance section - adjusted for the new theme */
+        .top-performance {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-performance h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 250px;
+                position: fixed;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                box-shadow: 2px 0 15px rgba(0, 0, 0, 0.4);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                margin: 1rem; /* Adjust margin for mobile */
+            }
+
+            .main-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 0;
+            }
+
+            .hamburger-button {
+                display: block;
+            }
+
+            .dashboard-cards,
+            .chart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sales-analysis-filters {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            .sales-analysis-filters select,
+            .sales-analysis-filters button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="text-2xl font-bold">Inventory Management</h1>
+            </div>
+            <div class="text-gray-400 text-sm mb-4">Welcome, admin</div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html" class="active">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25h-2.25a2.25 2.25 0 0 1-2.25-2.25v-2.25Z" />
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="brands.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            Brands
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.71.774L2.5 21h19l-1.32-4.104a3 3 0 0 0-5.71-.774M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            Category
+                        </a>
+                    </li>
+                    <li class="mt-4 text-gray-500 uppercase text-xs font-semibold">Product</li>
+                    <li>
+                        <a href="add-product.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            Add Product
+                        </a>
+                    </li>
+                    <li>
+                        <a href="replenishment.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348A10.06 10.06 0 0 1 12 21.75c-2.786 0-5.433-.608-7.812-1.764M16.023 9.348c-.011.066-.021.132-.032.198M16.023 9.348A10.058 10.058 0 0 0 12 3.75c-2.786 0-5.433.608-7.812 1.764m15.624 0c.112.06.222.12.334.184m-15.624 0c-.112-.06-.222-.12-.334-.184M9 12.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                            Replenishment
+                        </a>
+                    </li>
+                    <li>
+                        <a href="manage-products.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 10.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM14.25 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM18.75 9.75a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM21 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM7.5 14.25a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM6 16.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM9.75 18.75a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 21a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM14.25 19.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 16.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM18.75 15a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM21 17.25a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                            </svg>
+                            Manage Products
+                        </a>
+                    </li>
+                    <li class="mt-4 text-gray-500 uppercase text-xs font-semibold">Order</li>
+                    <li>
+                        <a href="add-order.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            Add Order
+                        </a>
+                    </li>
+                    <li>
+                        <a href="manage-orders.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 10.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM14.25 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM18.75 9.75a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM21 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM7.5 14.25a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM6 16.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM9.75 18.75a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 21a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM14.25 19.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 16.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM18.75 15a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM21 17.25a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                            </svg>
+                            Manage Orders
+                        </a>
+                    </li>
+                    <li class="mt-4 text-gray-500 uppercase text-xs font-semibold">Report</li>
+                    <li>
+                        <a href="company-report.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125V17.25m0 0a1.125 1.125 0 0 0 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V10.5M12 2.25h.375a.625.625 0 0 1 .625.625v.375M12 2.25H12" />
+                            </svg>
+                            Company
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 4.636A11.955 11.955 0 0 1 12 2.25c4.023 0 7.744 1.446 10.574 3.812M12 12.75a1.5 1.5 0 0 0 1.5-1.5V6.75a1.5 1.5 0 0 0-3 0v4.5c0 .828.672 1.5 1.5 1.5ZM12 12.75a1.5 1.5 0 0 1 1.5 1.5v4.5c0 .828-.672 1.5-1.5 1.5Zm0 0a1.5 1.5 0 0 0-1.5 1.5v4.5c0 .828.672 1.5 1.5 1.5ZM5.636 19.364A11.955 11.955 0 0 1 12 21.75c4.023 0 7.744-1.446 10.574-3.812" />
+                            </svg>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content" id="mainContent">
+            <header class="main-header">
+                <h1 class="text-2xl font-bold">Dashboard Control panel</h1>
+                <div class="flex items-center gap-4">
+                    <button id="hamburgerButton" class="hamburger-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                    <a href="login.html" class="logout-button">Logout</a>
+                </div>
+            </header>
+
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 7.48 7.5H19.105a2.25 2.25 0 0 0 2.15-1.588L22.5 4.5m-19.25 0-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-19.25 0a3 3 0 0 0-3 3v.75m3-3h-.115-.562a45.33 45.33 0 0 1 2.333-.967m0 0B6.723 6.723 0 0 1 9 3.75a6.723 6.723 0 0 1 6-2.25h2.25c.51 0 .955.343 1.087.835l.383 1.47A3 3 0 0 0 19.105 7.5H21.75m-1
